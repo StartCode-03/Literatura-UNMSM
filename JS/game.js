@@ -11,6 +11,7 @@ const campana = document.getElementById("campana");
 
 const menu = document.getElementById("menu");
 const game = document.getElementById("game");
+const loading = document.getElementById("loading");
 
 const preguntaTxt = document.getElementById("pregunta");
 const oracionTxt = document.getElementById("oracion");
@@ -66,40 +67,48 @@ function shuffleArray(array) {
 ================================ */
 
 function startGame(modo) {
-    switch (modo) {
-        case 'facil':
-            bancoActual = BANCO_FACIL;
-            break;
-        case 'medio':
-            bancoActual = BANCO_MEDIO;
-            break;
-        case 'dificil':
-            bancoActual = BANCO_DIFICIL;
-            break;
-        case 'bloque_a':
-            bancoActual = BANCO_DE_ORACIONES_A;
-            break;
-        case 'bloque_b':
-            bancoActual = BANCO_ORACIONES;
-            break;
-        case 'bloque_c':
-            bancoActual = BANCO_DE_ORACIONES_C;
-            break;
-        default:
-            console.error('Modo de juego no reconocido:', modo);
-            return;
-    }
-
-    preguntasRestantes = [...bancoActual];
-    score = 0;
-    contador = 100;
-    questionsAnswered = 0;
-
     menu.style.display = "none";
-    game.style.display = "block";
+    loading.style.display = "block";
 
-    actualizarUI();
-    siguientePregunta();
+    // Simulate loading time
+    setTimeout(() => {
+        switch (modo) {
+            case 'facil':
+                bancoActual = BANCO_FACIL;
+                break;
+            case 'medio':
+                bancoActual = BANCO_MEDIO;
+                break;
+            case 'dificil':
+                bancoActual = BANCO_DIFICIL;
+                break;
+            case 'bloque_a':
+                bancoActual = BANCO_DE_ORACIONES_A;
+                break;
+            case 'bloque_b':
+                bancoActual = BANCO_ORACIONES;
+                break;
+            case 'bloque_c':
+                bancoActual = BANCO_DE_ORACIONES_C;
+                break;
+            default:
+                console.error('Modo de juego no reconocido:', modo);
+                loading.style.display = "none";
+                menu.style.display = "block";
+                return;
+        }
+
+        preguntasRestantes = [...bancoActual];
+        score = 0;
+        contador = 100;
+        questionsAnswered = 0;
+
+        loading.style.display = "none";
+        game.style.display = "block";
+
+        actualizarUI();
+        siguientePregunta();
+    }, 1000); // 1 second delay to simulate loading
 }
 
 /* ===============================
