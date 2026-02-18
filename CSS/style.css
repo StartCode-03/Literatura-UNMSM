@@ -291,3 +291,24 @@ button:hover {
         padding-left: 30px;
     }
 }
+
+@media (hover: none) {
+  button:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  #respuestas button:hover {
+      background: var(--surface-color);
+      color: var(--text-color);
+  }
+
+  #skipBtn:hover {
+      background: var(--skip-color);
+      box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+  }
+
+  #lobbyBtn:hover {
+      background: var(--secondary-color);
+  }
+}
