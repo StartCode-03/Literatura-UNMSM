@@ -19,8 +19,35 @@ const respuestasDiv = document.getElementById("respuestas");
 const scoreTxt = document.getElementById("score");
 const contadorTxt = document.getElementById("contador");
 const questionCounterTxt = document.getElementById("question-counter");
-const skipBtn = document.getElementById("skipBtn");
 const highScoresList = document.getElementById("highScoresList");
+
+/* ===============================
+   EVENT LISTENERS
+================================ */
+
+function setupEventListeners() {
+    const buttons = {
+        'start-facil': () => startGame('facil'),
+        'start-medio': () => startGame('medio'),
+        'start-dificil': () => startGame('dificil'),
+        'start-bloque_a': () => startGame('bloque_a'),
+        'start-bloque_b': () => startGame('bloque_b'),
+        'start-bloque_c': () => startGame('bloque_c'),
+        'skipBtn': skipQuestion,
+        'lobbyBtn': returnToLobby
+    };
+
+    for (const id in buttons) {
+        const button = document.getElementById(id);
+        if (button) {
+            button.addEventListener('click', buttons[id]);
+            button.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                buttons[id]();
+            });
+        }
+    }
+}
 
 /* ===============================
    LOBBY & HIGH SCORES
@@ -28,6 +55,7 @@ const highScoresList = document.getElementById("highScoresList");
 
 function initLobby() {
     updateHighScoresDisplay();
+    setupEventListeners();
 }
 
 function updateHighScoresDisplay() {
@@ -68,7 +96,7 @@ function shuffleArray(array) {
 
 function startGame(modo) {
     menu.style.display = "none";
-    loading.style.display = "block";
+    loading.style.display = "flex";
 
     // Simulate loading time
     setTimeout(() => {
@@ -86,7 +114,7 @@ function startGame(modo) {
                 bancoActual = BANCO_DE_ORACIONES_A;
                 break;
             case 'bloque_b':
-                bancoActual = BANCO_ORACIONES;
+                bancoActual = BANCO_DE_ORACIONES_B;
                 break;
             case 'bloque_c':
                 bancoActual = BANCO_DE_ORACIONES_C;
@@ -151,7 +179,6 @@ function siguientePregunta() {
         respuestasDiv.appendChild(btn);
     });
 
-    skipBtn.style.display = "block";
     actualizarUI();
 }
 
@@ -165,7 +192,7 @@ function responder(selectedIndex, selectedButton) {
         b.disabled = true;
     });
 
-    skipBtn.style.display = "none";
+    document.getElementById('skipBtn').style.display = 'none';
 
     const correctIndex = preguntaActual.c;
 
@@ -195,8 +222,11 @@ function responder(selectedIndex, selectedButton) {
         const nextBtn = document.createElement("button");
         nextBtn.innerText = "Siguiente →";
         nextBtn.className = "siguiente-btn";
-        nextBtn.onclick = siguientePregunta;
-        // Insert nextBtn before the game-footer
+        nextBtn.addEventListener('click', siguientePregunta);
+        nextBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            siguientePregunta();
+        });
         const gameFooter = document.querySelector(".game-footer");
         game.insertBefore(nextBtn, gameFooter);
     }, 800);

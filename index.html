@@ -7,7 +7,10 @@
 </head>
 <body>
 
-<p class="mobile-notice">Si notas que un botón se queda resaltado en azul (como si el mouse estuviera encima) en tu dispositivo móvil, simplemente toca en cualquier espacio vacío de la pantalla para solucionarlo.</p>
+<div class="mobile-notice" onclick="this.style.display='none'">
+    Si un botón se queda resaltado, toca un espacio vacío para solucionarlo. <br><b>Toca este mensaje para ocultarlo.</b>
+</div>
+
 <div id="loading" style="display:none;">
     <div class="spinner"></div>
     <h2>Cargando...</h2>
@@ -23,14 +26,14 @@
     </div>
 
     <h2>Niveles</h2>
-    <button onclick="startGame('facil')">Nivel Fácil</button>
-    <button onclick="startGame('medio')">Nivel Medio</button>
-    <button onclick="startGame('dificil')">Nivel Difícil</button>
+    <button id="start-facil">Nivel Fácil</button>
+    <button id="start-medio">Nivel Medio</button>
+    <button id="start-dificil">Nivel Difícil</button>
 
     <h2>Modo Oraciones</h2>
-    <button onclick="startGame('bloque_a')">Oraciones Básicas</button>
-    <button onclick="startGame('bloque_b')">Sintaxis Avanzada</button>
-    <button onclick="startGame('bloque_c')">Teoría (UNI / San Marcos)</button>
+    <button id="start-bloque_a">Oraciones Básicas</button>
+    <button id="start-bloque_b">Sintaxis Avanzada</button>
+    <button id="start-bloque_c">Teoría (UNI / San Marcos)</button>
 </div>
 
 <div id="game" style="display:none;">
@@ -46,8 +49,8 @@
     <div id="respuestas"></div>
 
     <div class="game-footer">
-        <button id="skipBtn" onclick="skipQuestion()">Pasar</button>
-        <button id="lobbyBtn" onclick="returnToLobby()">Ir al Lobby</button>
+        <button id="skipBtn">Pasar</button>
+        <button id="lobbyBtn">Ir al Lobby</button>
     </div>
 </div>
 
