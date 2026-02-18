@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Academia de Lenguaje</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+<div id="menu">
+    <h1>🎓 Academia de Lenguaje</h1>
+
+    <div id="high-scores">
+        <h2>Mejores Puntajes</h2>
+        <ol id="highScoresList"></ol>
+    </div>
+
+    <h2>Niveles</h2>
+    <button onclick="startGame('facil')">Nivel Fácil</button>
+    <button onclick="startGame('medio')">Nivel Medio</button>
+    <button onclick="startGame('dificil')">Nivel Difícil</button>
+
+    <h2>Modo Oraciones</h2>
+    <button onclick="startGame('bloque_a')">Oraciones Básicas</button>
+    <button onclick="startGame('bloque_b')">Sintaxis Avanzada</button>
+    <button onclick="startGame('bloque_c')">Teoría (UNI / San Marcos)</button>
+</div>
+
+<div id="game" style="display:none;">
+    <div class="game-header">
+        <h2 id="contador">100</h2>
+        <h3 id="score">Puntaje: 0</h3>
+        <h3 id="question-counter">Preguntas: 0</h3>
+    </div>
+
+    <div id="oracion"></div>
+    <h2 id="pregunta"></h2>
+
+    <div id="respuestas"></div>
+
+    <div class="game-footer">
+        <button id="skipBtn" onclick="skipQuestion()">Pasar</button>
+        <button id="lobbyBtn" onclick="returnToLobby()">Ir al Lobby</button>
+    </div>
+</div>
+
+<audio id="campana" src="public/campana.mp3"></audio>
+
+<!-- Bancos de preguntas -->
+<script src="JS/preguntas/preguntas_facil.js"></script>
+<script src="JS/preguntas/preguntas_medio.js"></script>
+<script src="JS/preguntas/preguntas_dificiles.js"></script>
+
+<!-- Bancos de oraciones -->
+<script src="JS/bloqes/bloque_a.js"></script>
+<script src="JS/bloqes/bloque_b.js"></script>
+<script src="JS/bloqes/bloque_c.js"></script>
+
+<!-- Motor del juego -->
+<script src="JS/game.js"></script>
+
+</body>
+</html>
